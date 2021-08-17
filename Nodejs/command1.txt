@@ -1,0 +1,5 @@
+npm install --save-dev sequelize-cli@6.2.0
+
+npx sequelize-cli init
+
+.sequelizerc
