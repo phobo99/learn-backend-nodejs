@@ -1,5 +1,6 @@
 import db from "../models/index";
 import bcrypt from 'bcryptjs';
+import _ from 'lodash';
 
 
 let handleUserLogin = (email, password) => {
@@ -62,7 +63,54 @@ let checkUserEmail = (userEmail) => {
     })
 }
 
+// cach viet function khac
+export async function getAllUserRecoed(userId){
+    try {
+        if(_.isEmpty(userId)){
+            // khoong co id get all
+        } else {
+             // find One 
+        }
+
+        return await db.User.findAll({})
+        
+    } catch(e){
+        console.log(e)
+    }    
+}
+
+let getAllUsers = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = '';
+            if (userId === 'ALL') {
+                users = await db.User.findAll({
+                    attributes: {
+                        exclude: ['password']
+                    }
+                })
+            }
+            if (userId && userId !== 'ALL') {
+                users = await db.User.findOne({
+                    where: {
+                        id: userId
+                    },
+                    attributes: {
+                        exclude: ['password']
+                    }
+                })
+            }
+            resolve(users)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
+
 module.exports = {
     handleUserLogin: handleUserLogin,
     checkUserEmail: checkUserEmail,
+    getAllUsers: getAllUsers,
+    getAllUserRecoed: getAllUserRecoed
 }
