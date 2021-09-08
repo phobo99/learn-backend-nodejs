@@ -124,28 +124,30 @@ let createNewUser = (data) => {
         try {
             //Check email is exist??
             let check = await checkUserEmail(data.email);
-            if (check === true) {
+            if (check) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Your email already used, Plz try another email'
                 })
-            }
-            let hassPasswordFromBcrypt = await hashUserPassword(data.password);
-            await db.User.create({
-                email: data.email,
-                password: hassPasswordFromBcrypt,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                address: data.address,
-                phonenumber: data.phonenumber,
-                gender: data.gender === '1' ? true : false,
-                roleId: data.roleId,
-            })
+            } else {
+                let hassPasswordFromBcrypt = await hashUserPassword(data.password);
+                await db.User.create({
+                    email: data.email,
+                    password: hassPasswordFromBcrypt,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    address: data.address,
+                    phonenumber: data.phonenumber,
+                    gender: data.gender === '1' ? true : false,
+                    roleId: data.roleId,
+                })
 
-            resolve({
-                errCode: 0,
-                message: 'OK'
-            })
+                resolve({
+                    errCode: 0,
+                    message: 'OK'
+                })
+            }
+
         } catch (e) {
             reject(e)
         }
@@ -181,10 +183,10 @@ let deleteUser = (userId) => {
 let updateUserData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if(!data.id){
+            if (!data.id) {
                 resolve({
-                    errCode:2,
-                    errMessage:'Missing required parameters'
+                    errCode: 2,
+                    errMessage: 'Missing required parameters'
                 })
             }
             let user = await db.User.findOne({
@@ -195,7 +197,7 @@ let updateUserData = (data) => {
                 user.firstName = data.firstName;
                 user.lastName = data.lastName;
                 user.address = data.address;
-                
+
                 await user.save();
                 // await db.User.save({
                 //     firstName: data.firstName,
