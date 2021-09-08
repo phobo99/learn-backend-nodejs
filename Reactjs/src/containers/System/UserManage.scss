@@ -49,3 +49,39 @@
         color: orange !important;
     }
 }
+
+.modal-user-container {
+    .modal-content {
+        .modal-header {
+            button {
+                background: transparent !important;
+                color: white;
+                border: none;
+                font-size: 30px;
+            }
+        }
+    }
+    .modal-user-body {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            width: 49%;
+
+            &.max-width-input {
+                width: 100%;
+            }
+
+            input {
+                border-radius: 4px;
+                height: 30px;
+                outline: none;
+                border: 1px solid gray;
+                padding: 0 10px;
+            }
+        }
+    }
+}
