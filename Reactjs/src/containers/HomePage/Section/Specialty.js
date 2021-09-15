@@ -11,7 +11,9 @@ class Specialty extends Component {
             <div className="section-share section-specialty">
                 <div className="section-container">
                     <div className="section-header">
-                        <span className="title-section">Chuyên khoa phổ biến</span>
+                        <div className="title-section">
+                            <h2>Chuyên khoa phổ biến</h2>
+                        </div>
                         <button className="btn-section">Xem thêm</button>
                     </div>
                     <div className="section-body">

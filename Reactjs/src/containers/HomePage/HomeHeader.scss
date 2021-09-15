@@ -1,7 +1,11 @@
 .home-header-container {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
   height: 65px;
   width: 100%;
   padding: 0 40px;
+  z-index: 9999;
 
   .home-header-content {
     width: 100%;
@@ -69,7 +73,7 @@
           }
         }
         &:hover {
-          opacity: .8;
+          opacity: 0.8;
         }
       }
       .language-en {
@@ -85,7 +89,7 @@
           }
         }
         &:hover {
-          opacity: .8;
+          opacity: 0.8;
         }
       }
     }
