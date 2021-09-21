@@ -3,7 +3,7 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     genders: [],
     roles: [],
-    position: []
+    positions: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -11,7 +11,7 @@ const adminReducer = (state = initialState, action) => {
         case actionTypes.FETCH_GENDER_START:
             console.log('check fire fetch gender start', action)
             return {
-                ...state,
+                ...state
             }
         case actionTypes.FETCH_GENDER_SUCCESS:
             let copyState = { ...state }
@@ -23,7 +23,7 @@ const adminReducer = (state = initialState, action) => {
         case actionTypes.FETCH_GENDER_FAILED:
             console.log('check fire fetch gender failed', action)
             return {
-                ...state,
+                ...state
             }
         default:
             return state;
