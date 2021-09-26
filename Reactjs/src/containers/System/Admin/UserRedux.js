@@ -83,6 +83,10 @@ class UserRedux extends Component {
 
         //clear data create user success
         if (prevProps.listUsers !== this.props.listUsers) {
+            let arrGenders = this.props.genderRedux;
+            let arrPositions = this.props.positionRedux;
+            let arrRoles = this.props.roleRedux;
+
             this.setState({
                 email: '',
                 password: '',
@@ -90,9 +94,9 @@ class UserRedux extends Component {
                 lastName: '',
                 phoneNumber: '',
                 address: '',
-                gender: '',
-                position: '',
-                role: '',
+                gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : '',
+                posision: arrPositions && arrPositions.length > 0 ? arrPositions[0].key : '',
+                role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : '',
                 avatar: '',
             })
         }
@@ -226,6 +230,7 @@ class UserRedux extends Component {
                                 <label htmlFor=""><FormattedMessage id="manage-user.gender" /></label>
                                 <select className="form-control"
                                     onChange={(event) => { this.onChangeInput(event, 'gender') }}
+                                    value={gender}
                                 >
                                     {genders && genders.length > 0 &&
                                         genders.map((item, index) => {
@@ -242,6 +247,7 @@ class UserRedux extends Component {
                                 <label htmlFor=""><FormattedMessage id="manage-user.position" /></label>
                                 <select className="form-control"
                                     onChange={(event) => { this.onChangeInput(event, 'position') }}
+                                    value={position}
                                 >
                                     {roles && roles.length > 0 && roles.map((item, index) => {
                                         return (
@@ -257,6 +263,7 @@ class UserRedux extends Component {
                                 <label htmlFor=""><FormattedMessage id="manage-user.role" /></label>
                                 <select className="form-control"
                                     onChange={(event) => { this.onChangeInput(event, 'role') }}
+                                    value={role}
                                 >
                                     {positions && positions.length > 0 && positions.map((item, index) => {
                                         return (
