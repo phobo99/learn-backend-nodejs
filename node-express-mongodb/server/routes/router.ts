@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express'
 const route = express.Router()
 
-const services = require('../services/render');
-const controller = require('../controller/controller');
+import services from '../services/render';
+import controller from '../controller/controller';
 
 /**
  *  @description Root Route
@@ -24,10 +24,9 @@ route.get('/update-user', services.update_user)
 
 
 // API
-route.post('/api/users', controller.create);
-route.get('/api/users', controller.find);
-route.put('/api/users/:id', controller.update);
-route.delete('/api/users/:id', controller.delete);
+route.post('/api/users', controller.createCtrl);
+route.get('/api/users', controller.findCtrl);
+route.put('/api/users/:id', controller.updateCtrl);
+route.delete('/api/users/:id', controller.deleteCtrl);
 
-
-module.exports = route
+module.exports = route;

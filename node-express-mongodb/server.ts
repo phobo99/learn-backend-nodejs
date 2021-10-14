@@ -1,13 +1,13 @@
-const express = require('express');
-const morgan = require('morgan');
-const bodyparser = require("body-parser")
-const path = require('path')
-const connectDB = require('./server/database/connection');
+import express from 'express';
+import morgan from 'morgan';
+import bodyparser from "body-parser";
+import path from 'path';
+import connectDB from './server/database/connection';
 
 require('dotenv').config();
 
 
-const app = express();
+const app:express.Application = express();
 
 // dotenv.config
 const PORT = process.env.PORT || 8080
@@ -17,13 +17,15 @@ app.use(morgan('tiny'))
 
 //connection mongodb
 connectDB()
-
 // parse request to body-parser
 app.use(bodyparser.urlencoded({ extended: true }))
 
 //set view engine
 app.set("view engine", "ejs")
-// app.set("views", path.resolve(__dirname, "views/ejs"))
+// app.set("views", path.resolve(__dirname, "views/"))
+app.set("views", path.join(__dirname, "../views"));
+
+app.use(express.static(__dirname + '/assets'));
 
 //load assets
 app.use('/css', express.static(path.resolve(__dirname, "assets/css")))
