@@ -4,10 +4,10 @@ import _ from 'lodash';
 
 const salt = bcrypt.genSaltSync(10);
 
-let hashUserPassword = (password) => {
-    return new Promise(async (resolve, reject) => {
+let hashUserPassword = (password: string) => {
+    return new Promise((resolve, reject) => {
         try {
-            let hashPassword = await bcrypt.hashSync(password, salt);
+            let hashPassword = bcrypt.hashSync(password, salt);
             resolve(hashPassword);
         } catch (e) {
             reject(e);
@@ -15,10 +15,14 @@ let hashUserPassword = (password) => {
     })
 }
 
-let handleUserLogin = (email, password) => {
+let handleUserLogin = (email: string, password: string) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let userData = {};
+            let userData: { errCode: number, errMessage: string, user: any, } = {
+                errCode: 0,
+                errMessage: "",
+                user: undefined
+            };
             let isExist = await checkUserEmail(email);
             if (isExist) {
                 // user already exist
@@ -30,14 +34,13 @@ let handleUserLogin = (email, password) => {
                 if (user) {
                     //compare password
                     // kiểm tra xem nhập password có đúng không
-                    let check = await bcrypt.compareSync(password, user.password) // false
+                    let check = bcrypt.compareSync(password, user.password) // false
                     if (check) {
                         userData.errCode = 0;
                         userData.errMessage = 'OK';
                         delete user.password;   // xoá trường password
                         userData.user = user;
-                    }
-                    else {
+                    } else {
                         userData.errCode = 3;
                         userData.errMessage = 'Wrong password';
                     }
@@ -58,7 +61,7 @@ let handleUserLogin = (email, password) => {
 }
 
 // kiểm tra xem email đã có trong db hay chưa
-let checkUserEmail = (userEmail) => {
+let checkUserEmail = (userEmail: string) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
@@ -76,22 +79,20 @@ let checkUserEmail = (userEmail) => {
 }
 
 // cach viet function khac
-export async function getAllUserRecoed(userId) {
+export async function getAllUserRecoed(userId: any) {
     try {
         if (_.isEmpty(userId)) {
             // khoong co id get all
         } else {
-            // find One 
+            // find One
         }
-
         return await db.User.findAll({})
-
     } catch (e) {
         console.log(e)
     }
 }
 
-let getAllUsers = (userId) => {
+let getAllUsers = (userId: any) => {
     return new Promise(async (resolve, reject) => {
         try {
             let users = '';
@@ -119,10 +120,20 @@ let getAllUsers = (userId) => {
     })
 }
 
-let createNewUser = (data) => {
+let createNewUser = (data: {
+    email: string,
+    password: string,
+    firstName: string,
+    lastName: string,
+    address: string,
+    phonenumber: string,
+    gender: string,
+    roleId: string,
+    positionId: string,
+    avatar: string
+}) => {
     return new Promise(async (resolve, reject) => {
         try {
-            //Check email is exist??
             let check = await checkUserEmail(data.email);
             if (check) {
                 resolve({
@@ -143,20 +154,18 @@ let createNewUser = (data) => {
                     positionId: data.positionId,
                     image: data.avatar
                 })
-
                 resolve({
                     errCode: 0,
                     message: 'OK'
                 })
             }
-
         } catch (e) {
             reject(e)
         }
     })
 }
 
-let deleteUser = (userId) => {
+let deleteUser = (userId: number) => {
     return new Promise(async (resolve, reject) => {
         let user = await db.User.findOne({
             where: { id: userId }
@@ -167,11 +176,6 @@ let deleteUser = (userId) => {
                 errMessage: `The user isn't exist`
             })
         }
-        // if (user) {
-        //     await user.destroy();
-        // Lay data len nodejs, ma minh config raw roi thi ta khong dung duoc
-        // Boi vi khi day no khong con la chuan instance nua
-        // }
         await db.User.destroy({
             where: { id: userId }
         })
@@ -182,7 +186,17 @@ let deleteUser = (userId) => {
     })
 }
 
-let updateUserData = (data) => {
+let updateUserData = (data: {
+    id: string;
+    roleId: string;
+    positionId: string;
+    gender: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    phonenumber: string;
+    avatar: string;
+}) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!data.id || !data.roleId || !data.positionId || !data.gender) {
@@ -206,13 +220,7 @@ let updateUserData = (data) => {
                 if (data.avatar) {
                     user.image = data.avatar;
                 }
-
                 await user.save();
-                // await db.User.save({
-                //     firstName: data.firstName,
-                //     lastName: data.lastName,
-                //     address: data.address
-                // }, { where: { id: userId } })
                 resolve({
                     errCode: 0,
                     message: 'Update the user succeed!'
@@ -228,7 +236,7 @@ let updateUserData = (data) => {
         }
     })
 }
-let getAllCodeService = (typeInput) => {
+let getAllCodeService = (typeInput: any) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!typeInput) {
@@ -237,7 +245,7 @@ let getAllCodeService = (typeInput) => {
                     errMessage: 'Missing required parameters'
                 })
             } else {
-                let res = {}
+                let res: any = {}
                 let allcode = await db.Allcode.findAll({
                     where: { type: typeInput }
                 });
@@ -251,13 +259,13 @@ let getAllCodeService = (typeInput) => {
         }
     })
 }
-module.exports = {
-    handleUserLogin: handleUserLogin,
-    checkUserEmail: checkUserEmail,
-    getAllUsers: getAllUsers,
-    getAllUserRecoed: getAllUserRecoed, //demo
-    createNewUser: createNewUser,
-    deleteUser: deleteUser,
-    updateUserData: updateUserData,
-    getAllCodeService: getAllCodeService
+export default {
+    handleUserLogin,
+    checkUserEmail,
+    getAllUsers,
+    getAllUserRecoed, //demo
+    createNewUser,
+    deleteUser,
+    updateUserData,
+    getAllCodeService
 }

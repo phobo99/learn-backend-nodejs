@@ -1,21 +1,22 @@
-import express from "express";
-import bodyParser from "body-parser";
-import viewEngine from "./config/viewEngine";
-import initWebRoutes from "./route/web";
-import connectDB from "./config/connectDB";
+import express from 'express';
+import bodyParser from 'body-parser';
+import initWebRoutes from './route/web';
+import connectDB from './config/connectDB';
+
 // import cors from 'cors'; BUG
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-let app = express();
+let app: express.Application = express();
 // app.use(cors({ origin: true })) BUG > fix bellow
 
 // middleware to your NodeJS/Express app
 // Add headers before the routes are defined
-app.use(function (req, res, next) {
+app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', process.env.URL_REACT);
+    res.setHeader('Access-Control-Allow-Origin', process.env.URL_REACT || "");
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -25,28 +26,24 @@ app.use(function (req, res, next) {
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
+    // @ts-ignore tam thoi
     res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
     next();
 });
 
-//config app
-
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }))
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 
-viewEngine(app);
 initWebRoutes(app);
 
 connectDB();
 
 let port = process.env.PORT || 6969;
-// Port
 
 app.listen(port, () => {
-    // callback
     console.log("Backend Nodejs is running on the port:" + port)
 })

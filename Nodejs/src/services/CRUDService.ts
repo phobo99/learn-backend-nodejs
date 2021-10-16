@@ -3,7 +3,16 @@ import db from '../models/index'
 
 const salt = bcrypt.genSaltSync(10);
 
-let createNewUser = async (data) => {
+let createNewUser = async (data: {
+    password: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    phonenumber: string;
+    gender: string;
+    roleId: any;
+}) => {
     return new Promise(async (resolve, reject) => {
         try {
             let hassPasswordFromBcrypt = await hashUserPassword(data.password);
@@ -24,10 +33,10 @@ let createNewUser = async (data) => {
     })
 }
 
-let hashUserPassword = (password) => {
-    return new Promise(async (resolve, reject) => {
+let hashUserPassword = (password: string) => {
+    return new Promise((resolve, reject) => {
         try {
-            let hashPassword = await bcrypt.hashSync(password, salt);
+            let hashPassword = bcrypt.hashSync(password, salt);
             resolve(hashPassword);
         } catch (e) {
             reject(e);
@@ -47,7 +56,7 @@ let getAllUser = () => {
         }
     })
 }
-let getUserInfoById = (userId) => {
+let getUserInfoById = (userId: string) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
@@ -65,8 +74,8 @@ let getUserInfoById = (userId) => {
     })
 }
 
-let updateUserData = (data) => {
-    return new Promise(async (resolve, reject) => {
+let updateUserData = (data: { id: number; firstName: string; lastName: string; address: string; }) => {
+    return new Promise<void>(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
                 where: { id: data.id }
@@ -83,7 +92,6 @@ let updateUserData = (data) => {
                 resolve();
             }
             await db.User.update({
-
             })
         } catch (e) {
             reject(e)
@@ -91,8 +99,8 @@ let updateUserData = (data) => {
     })
 }
 
-let deleteUserById = (userId) => {
-    return new Promise(async (resolve, reject) => {
+let deleteUserById = (userId: any) => {
+    return new Promise<void>(async (resolve, reject) => {
         try {
             let user = await db.User.findOne({
                 where: { id: userId }
@@ -105,11 +113,11 @@ let deleteUserById = (userId) => {
     })
 }
 
-module.exports = {
-    createNewUser: createNewUser,
-    hashUserPassword: hashUserPassword,
-    getAllUser: getAllUser,
-    getUserInfoById: getUserInfoById,
-    updateUserData: updateUserData,
-    deleteUserById: deleteUserById
+export default {
+    createNewUser,
+    hashUserPassword,
+    getAllUser,
+    getUserInfoById,
+    updateUserData,
+    deleteUserById
 }

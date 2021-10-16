@@ -1,10 +1,9 @@
 import doctorService from "../services/doctorService";
+import express from "express";
 
-let getTopDoctorHome = async (req, res) => {
-    let limit = req.query.limit;
-    if (!limit) limit = 10;
+let getTopDoctorHome = async (req: express.Request, res: express.Response) => {
     try {
-        let response = await doctorService.getTopDoctorHome(+limit)
+        let response = await doctorService.getTopDoctorHome()
         return res.status(200).json(response)
     } catch (e) {
         console.log(e)
@@ -14,7 +13,7 @@ let getTopDoctorHome = async (req, res) => {
         })
     }
 }
-let getAllDoctors = async (req, res) => {
+let getAllDoctors = async (req: express.Request, res: express.Response) => {
     try {
         let doctors = await doctorService.getAllDoctors();
         return res.status(200).json(doctors)
@@ -26,7 +25,7 @@ let getAllDoctors = async (req, res) => {
         })
     }
 }
-let postInforDoctor = async (req, res) => {
+let postInforDoctor = async (req: express.Request, res: express.Response) => {
     try {
         let response = await doctorService.saveDetailInforDoctor(req.body);
         return res.status(200).json(response)
@@ -38,7 +37,7 @@ let postInforDoctor = async (req, res) => {
         })
     }
 }
-let getDetailDoctorById = async (req, res) => {
+let getDetailDoctorById = async (req: express.Request, res: express.Response) => {
     try {
         let info = await doctorService.getDetailDoctorById(req.query.id);
         return res.status(200).json(info)
@@ -50,9 +49,9 @@ let getDetailDoctorById = async (req, res) => {
         })
     }
 }
-module.exports = {
-    getTopDoctorHome: getTopDoctorHome,
-    getAllDoctors: getAllDoctors,
-    postInforDoctor: postInforDoctor,
-    getDetailDoctorById: getDetailDoctorById
+export default {
+    getTopDoctorHome,
+    getAllDoctors,
+    postInforDoctor,
+    getDetailDoctorById
 }

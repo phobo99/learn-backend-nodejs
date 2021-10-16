@@ -1,7 +1,7 @@
-const { Sequelize } = require('sequelize');
+import { Sequelize }  from'sequelize';
 
 // Option 2: Passing parameters separately (other dialects)
-const sequelize = new Sequelize('luudangpho', 'root', null, {
+const sequelize = new Sequelize('luudangpho', 'root', '', {
     host: 'localhost',
     dialect: 'mysql',
     logging: false
@@ -16,4 +16,4 @@ let connectDB = async () => {
     }
 }
 
-module.exports = connectDB;
+export default connectDB;

@@ -1,6 +1,7 @@
 import userService from "../services/userService"
+import express from "express";
 
-let handleLogin = async (req, res) => {
+let handleLogin = async (req: express.Request, res: express.Response) => {
     let email = req.body.email;
     let password = req.body.password;
 
@@ -11,10 +12,8 @@ let handleLogin = async (req, res) => {
             message: 'Missing inputs parameter!'
         })
     }
-
     //còn có thì thực hiện vào đây
-    let userData = await userService.handleUserLogin(email, password);
-
+    let userData: any = await userService.handleUserLogin(email, password);
     return res.status(200).json({
         errCode: userData.errCode,
         message: userData.errMessage,
@@ -22,9 +21,8 @@ let handleLogin = async (req, res) => {
     })
 }
 
-let handleGetAllUsers = async (req, res) => {
+let handleGetAllUsers = async (req: express.Request, res: express.Response) => {
     let id = req.query.id;   //ALL, id
-
     if (!id) {
         return res.status(200).json({
             errCode: 1,
@@ -40,14 +38,14 @@ let handleGetAllUsers = async (req, res) => {
     })
 }
 
-let handleCreateNewUser = async (req, res) => {
+let handleCreateNewUser = async (req: express.Request, res: express.Response) => {
     let message = await userService.createNewUser(req.body);
     console.log(message);
     return res.status(200).json(message)
 }
 
 
-let handleDeleteUser = async (req, res) => {
+let handleDeleteUser = async (req: express.Request, res: express.Response) => {
     if (!req.body.id) {
         return res.status(200).json({
             errCode: 1,
@@ -58,12 +56,13 @@ let handleDeleteUser = async (req, res) => {
     return res.status(200).json(message)
 }
 
-let handleEditUser = async (req, res) => {
+let handleEditUser = async (req: express.Request, res: express.Response) => {
     let data = req.body;
     let message = await userService.updateUserData(data);
     return res.status(200).json(message)
 }
-let getAllCode = async (req, res) => {
+
+let getAllCode = async (req: express.Request, res: express.Response) => {
     try {
         let data = await userService.getAllCodeService(req.query.type);
         return res.status(200).json(data);
@@ -74,11 +73,11 @@ let getAllCode = async (req, res) => {
         })
     }
 }
-module.exports = {
-    handleLogin: handleLogin,
-    handleGetAllUsers: handleGetAllUsers,
-    handleCreateNewUser: handleCreateNewUser,
-    handleEditUser: handleEditUser,
-    handleDeleteUser: handleDeleteUser,
-    getAllCode: getAllCode
+export default {
+    handleLogin,
+    handleGetAllUsers,
+    handleCreateNewUser,
+    handleEditUser,
+    handleDeleteUser,
+    getAllCode
 }

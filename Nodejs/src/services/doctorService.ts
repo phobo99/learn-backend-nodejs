@@ -1,10 +1,9 @@
 import db from "../models/index";
 
-let getTopDoctorHome = (limitInput) => {
+let getTopDoctorHome = () => {
     return new Promise(async (resolve, reject) => {
         try {
             let users = await db.User.findAll({
-                limit: limitInput,
                 where: { roleId: 'R2' },
                 order: [['createdAt', 'DESC']],
                 attributes: {
@@ -41,11 +40,16 @@ let getAllDoctors = () => {
             })
         } catch (e) {
             reject(e)
-
         }
     })
 }
-let saveDetailInforDoctor = (inputData) => {
+let saveDetailInforDoctor = (inputData: {
+    doctorId: number;
+    contentHTML: string;
+    contentMarkdown: string;
+    action: string;
+    description: string;
+}) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!inputData.doctorId || !inputData.contentHTML
@@ -85,7 +89,7 @@ let saveDetailInforDoctor = (inputData) => {
         }
     })
 }
-let getDetailDoctorById = (inputId) => {
+let getDetailDoctorById = (inputId: any) => {
     return new Promise(async (resolve, reject) => {
         try {
             if (!inputId) {
@@ -113,26 +117,23 @@ let getDetailDoctorById = (inputId) => {
                     raw: false,
                     nest: true
                 })
-
                 if (data && data.image) {
                     data.image = new Buffer(data.image, 'base64').toString('binary')
                 }
                 if (!data) data = {};
-
                 resolve({
                     errCode: 0,
                     data: data
                 })
             }
-
         } catch (e) {
             reject(e)
         }
     })
 }
-module.exports = {
-    getTopDoctorHome: getTopDoctorHome,
-    getAllDoctors: getAllDoctors,
-    saveDetailInforDoctor: saveDetailInforDoctor,
-    getDetailDoctorById: getDetailDoctorById
+export default {
+    getTopDoctorHome,
+    getAllDoctors,
+    saveDetailInforDoctor,
+    getDetailDoctorById
 }

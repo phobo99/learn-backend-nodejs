@@ -133,7 +133,6 @@ class ManageDoctor extends Component {
                     </div>
                 </div>
                 <div className="manage-doctor-editor">
-
                 </div>
                 <MdEditor
                     style={{ height: '500px' }}
