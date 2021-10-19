@@ -34,6 +34,9 @@
       "manage-specialty": "Manage specialies",
       "handbook": "Handbook",
       "manage-handbook": "Manage handbook"
+    },
+    "doctor": {
+      "manage-schedule": "Manage Doctor's schedule"
     }
   },
   "manage-user": {
@@ -53,6 +56,6 @@
   },
   "homepage": {
     "outstanding-doctor": "Outstanding Doctor",
-    "more-info":"View more"
+    "more-info": "View more"
   }
 }
