@@ -19,12 +19,7 @@ export const adminMenu = [
             //     name: 'menu.admin.manage-admin', link: '/system/user-admin'
             // }
             { //quản lý kế hoạch khám bệnh của bác sĩ
-                name: 'menu.doctor.manage-schedule',
-                menus: [
-                    {
-                        name: 'menu.doctor.schedule', link: '/system/user-doctor'
-                    }
-                ]
+                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
             },
         ]
     },
@@ -55,11 +50,11 @@ export const adminMenu = [
 ];
 
 export const doctorMenu = [
-    { //quản lý kế hoạch khám bệnh của bác sĩ
-        name: 'menu.doctor.manage-schedule',
+    {
+        name: 'menu.doctor.manage-user',
         menus: [
-            {
-                name: 'menu.doctor.schedule', link: '/system/user-doctor'
+            {//quản lý kế hoạch khám bệnh của bác sĩ
+                name: 'menu.doctor.manage-schedule', link: '/doctor/manage-schedule'
             }
         ]
     },
