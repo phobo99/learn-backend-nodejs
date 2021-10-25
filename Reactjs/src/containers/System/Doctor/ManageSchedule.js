@@ -1,15 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-
-class ManageSchedule extends Component {
-
-    render() {
-        return (
-            <React.Fragment>
-                <div>Manage Schedule</div>
-            </React.Fragment>
-=======
 import './ManageSchedule.scss';
 import { FormattedMessage } from 'react-intl';
 import Select from 'react-select';
@@ -92,29 +82,21 @@ class ManageSchedule extends Component {
                     </div>
                 </div>
             </div>
->>>>>>> 7c427ce9dc90730fefd3bf9fbb27f661a216645e
         );
     }
 }
 
 const mapStateToProps = state => {
     return {
-<<<<<<< HEAD
-        isLoggedIn: state.user.isLoggedIn
-=======
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
         allDoctors: state.admin.allDoctors,
->>>>>>> 7c427ce9dc90730fefd3bf9fbb27f661a216645e
     };
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-<<<<<<< HEAD
-=======
         fetchAllDoctorsRedux: () => dispatch(actions.fetchAllDoctors()),
->>>>>>> 7c427ce9dc90730fefd3bf9fbb27f661a216645e
     };
 }
 
