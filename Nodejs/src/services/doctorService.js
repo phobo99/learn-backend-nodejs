@@ -130,9 +130,29 @@ let getDetailDoctorById = (inputId) => {
         }
     })
 }
+let bulkCreateSchedule = (data) => {
+    return new Promise((resolve, reject) => {
+        try {
+            if (!data.arrSchedule) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing required parameter!'
+                })
+            } else {
+                let schedule = data.arrSchedule
+                
+                resolve("")
+            }
+
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
 module.exports = {
     getTopDoctorHome: getTopDoctorHome,
     getAllDoctors: getAllDoctors,
     saveDetailInforDoctor: saveDetailInforDoctor,
-    getDetailDoctorById: getDetailDoctorById
+    getDetailDoctorById: getDetailDoctorById,
+    bulkCreateSchedule: bulkCreateSchedule
 }
