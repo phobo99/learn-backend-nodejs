@@ -53,13 +53,13 @@ let getDetailDoctorById = async (req, res) => {
 
 let bulkCreateSchedule = async (req, res) => {
     try {
-        let info = await doctorService.bulkCreateSchedule(req.query.id);
+        let info = await doctorService.bulkCreateSchedule(req.body);
         return res.status(200).json(info)
     } catch (e) {
         console.log(e)
-        res.status(200).json({
+        res.status(500).json({
             errCode: -1,
-            errMessage: 'error from the server'
+            errMessage: 'Error from the server'
         })
     }
 }

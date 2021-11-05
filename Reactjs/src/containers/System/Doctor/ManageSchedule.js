@@ -103,21 +103,26 @@ class ManageSchedule extends Component {
         let result = [];
 
         if (!currentDate) {
-            toast.error("Invalid date!")
+            toast.error("Invalid date!");
+            return;
         }
         if (selectedDoctor && _.isEmpty(selectedDoctor)) {
             toast.error("Invalid Selected Doctor!")
+            return;
         }
-        let formattedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
+        //let formattedDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER)
+        // let formattedDate = moment(currentDate).unix()
+        let formattedDate = new Date(currentDate).getTime();
+
 
         if (rangeTime && rangeTime.length > 0) {
             let selectedTime = rangeTime.filter(item => item.isSelected === true)
             if (selectedTime && selectedTime.length > 0) {
-                selectedTime.map(schedule => {
+                selectedTime.map((schedule, index) => {
                     let object = {};
                     object.doctorId = selectedDoctor.value;
                     object.date = formattedDate;
-                    object.time = schedule.keyMap;
+                    object.timeType = schedule.keyMap;
                     result.push(object)
                 })
             } else {
@@ -127,7 +132,9 @@ class ManageSchedule extends Component {
         }
 
         let res = await saveBulkScheduleDoctor({
-            arrSchedule: result
+            arrSchedule: result,
+            doctorId: selectedDoctor.value,
+            formattedDate: formattedDate
         })
         console.log(res);
     }
