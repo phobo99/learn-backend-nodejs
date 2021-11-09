@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
-import './DoctorDetail.scss'
+import './DetailDoctor.scss'
 import { getDetailInforDoctor } from '../../../services/userService'
 import { LANGUAGES } from '../../../utils';
+import DoctorSchedule from './DoctorSchedule';
 
 class DetailDoctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            detailDoctors: {}
+            detailDoctor: {}
         }
     }
     async componentDidMount() {
@@ -18,7 +19,7 @@ class DetailDoctor extends Component {
             let res = await getDetailInforDoctor(id)
             if (res && res.errCode === 0) {
                 this.setState({
-                    detailDoctors: res.data
+                    detailDoctor: res.data
                 })
             }
         }
@@ -29,11 +30,11 @@ class DetailDoctor extends Component {
     }
     render() {
         let { language } = this.props;
-        let { detailDoctors } = this.state;
+        let { detailDoctor } = this.state;
         let nameVi = '', nameEn = '';
-        if (detailDoctors && detailDoctors.positionData) {
-            nameVi = `${detailDoctors.positionData.valueVi},${detailDoctors.lastName} ${detailDoctors.firstName}`;
-            nameEn = `${detailDoctors.positionData.valueEn},${detailDoctors.firstName} ${detailDoctors.lastName}`;
+        if (detailDoctor && detailDoctor.positionData) {
+            nameVi = `${detailDoctor.positionData.valueVi},${detailDoctor.lastName} ${detailDoctor.firstName}`;
+            nameEn = `${detailDoctor.positionData.valueEn},${detailDoctor.firstName} ${detailDoctor.lastName}`;
         }
         return (
             <>
@@ -44,7 +45,7 @@ class DetailDoctor extends Component {
                     <div className="intro-doctor">
                         <div
                             className="content-left"
-                            style={{ backgroundImage: `url(${detailDoctors && detailDoctors.image ? detailDoctors.image : ''})` }}
+                            style={{ backgroundImage: `url(${detailDoctor && detailDoctor.image ? detailDoctor.image : ''})` }}
                         >
                         </div>
                         <div className="content-right">
@@ -52,28 +53,35 @@ class DetailDoctor extends Component {
                                 {language === LANGUAGES.VI ? nameVi : nameEn}
                             </div>
                             <div className="down">
-                                {detailDoctors
-                                    && detailDoctors.Markdown
-                                    && detailDoctors.Markdown.description
+                                {detailDoctor
+                                    && detailDoctor.Markdown
+                                    && detailDoctor.Markdown.description
                                     &&
                                     <span>
-                                        {detailDoctors.Markdown.description}
+                                        {detailDoctor.Markdown.description}
                                     </span>
                                 }
                             </div>
                         </div>
                     </div>
-                    <div className="schedule-doctor"></div>
-                    <div className="content-doctor">
-                        <div className="detail-info-doctor">
-                            {detailDoctors
-                                && detailDoctors.Markdown
-                                && detailDoctors.Markdown.contentHTML
-                                &&
-                                <div dangerouslySetInnerHTML={{ __html: detailDoctors.Markdown.contentHTML }}>
-                                </div>
-                            }
+                    <div className="schedule-doctor">
+                        <div className="content-left">
+                            <DoctorSchedule
+                                doctorIdFromParent={detailDoctor && detailDoctor.id ? detailDoctor.id : -1}
+                            />
                         </div>
+                        <div className="content-right">
+
+                        </div>
+                    </div>
+                    <div className="detail-info-doctor">
+                        {detailDoctor
+                            && detailDoctor.Markdown
+                            && detailDoctor.Markdown.contentHTML
+                            &&
+                            <div dangerouslySetInnerHTML={{ __html: detailDoctor.Markdown.contentHTML }}>
+                            </div>
+                        }
                     </div>
                     <div className="comment-doctor"></div>
                 </div>
