@@ -67,9 +67,18 @@
   "patient": {
     "detail-doctor": {
       "schedule": "Schedule",
-      "no-schedule": "The doctor does not have an appointment during this time",
+      "no-schedule": "The doctor does not have an appointment during this time, please choose another time",
       "choose": "Choose ",
       "book-free": " and book (free)"
+    }
+  },
+  "admin": {
+    "manage-doctor": {
+      "title": "Create more information doctors",
+      "choose-doctor": "Choose doctor",
+      "description": "Information description",
+      "add": "Add",
+      "save": "Save"
     }
   }
 }

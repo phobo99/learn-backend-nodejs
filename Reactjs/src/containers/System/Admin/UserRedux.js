@@ -72,7 +72,7 @@ class UserRedux extends Component {
             let arrPositions = this.props.positionRedux;
             this.setState({
                 positionArr: this.props.positionRedux,
-                posision: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : ''
+                position: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : ''
             })
         }
 
@@ -98,7 +98,7 @@ class UserRedux extends Component {
                 phoneNumber: '',
                 address: '',
                 gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].keyMap : '',
-                posision: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : '',
+                position: arrPositions && arrPositions.length > 0 ? arrPositions[0].keyMap : '',
                 role: arrRoles && arrRoles.length > 0 ? arrRoles[0].keyMap : '',
                 avatar: '',
                 action: CRUD_ACTIONS.CREATE,
@@ -200,7 +200,7 @@ class UserRedux extends Component {
             phoneNumber: user.phonenumber,
             address: user.address,
             gender: user.gender,
-            posision: user.positionId,
+            position: user.positionId,
             role: user.roleId,
             avatar: '',
             previewImgUrl: imageBase64,
