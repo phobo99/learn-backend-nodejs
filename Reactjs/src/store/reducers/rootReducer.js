@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
-import appReducer from "./appReducer";
-import userReducer from "./userReducer";
-import adminReducer from "./adminReducer"
+import appReducer from "./appReducer.js";
+import userReducer from "./userReducer.js";
+import adminReducer from "./adminReducer.js"
 
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';

@@ -1,10 +1,10 @@
-import useFetch from "../customize/fetch";
+import useFetch from "../customize/fetch.js";
 import './Blog.scss';
 import { Link, useHistory } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from 'react';
-import AddNewBlog from "./AddNewBlog";
+import AddNewBlog from "./AddNewBlog.js";
 
 const Blog = () => {
 

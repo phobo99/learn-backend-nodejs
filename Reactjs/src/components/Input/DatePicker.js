@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Flatpickr from 'react-flatpickr';
 import moment from 'moment';
 
-import { KeyCodeUtils } from "../../utils";
+import { KeyCodeUtils } from "../../utils.js";
 import './DatePicker.scss';
 
 // const CustomInput = ({ value, defaultValue, inputRef, onInputChange, onInputBlur, ...props }) => {

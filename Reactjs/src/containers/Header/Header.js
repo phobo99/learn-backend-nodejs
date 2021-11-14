@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import * as actions from "../../store/actions";
+import * as actions from "../../store/actions.js";
 import Navigator from '../../components/Navigator';
-import { adminMenu, doctorMenu } from './menuApp';
+import { adminMenu, doctorMenu } from './menuApp.js';
 import './Header.scss';
-import { LANGUAGES, USER_ROLE } from '../../utils'
+import { LANGUAGES, USER_ROLE } from '../../utils.js'
 import { FormattedMessage } from 'react-intl';
 import _ from 'lodash'
 

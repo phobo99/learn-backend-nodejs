@@ -3,9 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './HomeHeader.scss'
 import Logo from '../../assets/logo.svg'
-import { LANGUAGES } from '../../utils/constant';
+import { LANGUAGES } from '../../utils/constant.js';
 import { withRouter } from 'react-router'
-import { changeLanguageApp } from '../../store/actions/appActions';
+import { changeLanguageApp } from '../../store/actions/appActions.js';
 
 class HomeHeader extends Component {
     changeLanguage = (language) => {

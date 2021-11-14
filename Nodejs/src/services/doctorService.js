@@ -1,4 +1,4 @@
-import db from "../models/index";
+import db from "../models/index.js";
 require('dotenv').config();
 import _ from 'lodash';
 

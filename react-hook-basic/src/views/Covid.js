@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useFetch from "../customize/fetch";
+import useFetch from "../customize/fetch.js";
 import moment from "moment";
 
 const Covid = () => {

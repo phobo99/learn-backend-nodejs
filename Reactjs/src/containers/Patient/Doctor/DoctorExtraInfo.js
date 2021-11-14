@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import './DoctorExtraInfo.scss'
-import { LANGUAGES } from '../../../utils';
-import { getExtraInfoDoctorById } from '../../../services/userService';
+import { LANGUAGES } from '../../../utils.js';
+import { getExtraInfoDoctorById } from '../../../services/userService.js';
 import { FormattedMessage } from "react-intl";
 import NumberFormat from "react-number-format";
 

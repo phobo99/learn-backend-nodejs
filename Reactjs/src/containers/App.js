@@ -2,18 +2,18 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
-import { history } from '../redux'
+import { history } from '../redux.js'
 import { ToastContainer } from 'react-toastify';
-import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
-import { path } from '../utils'
-import Home from '../routes/Home';
+import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication.js';
+import { path } from '../utils.js'
+import Home from '../routes/Home.js';
 import Login from './Auth/Login';
-import System from '../routes/System';
+import System from '../routes/System.js';
 import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from './HomePage/HomePage'
 import DetailDoctor from './Patient/Doctor/DetailDoctor';
 import CustomScrollbars from '../components/CustomScrollbars'
-import Doctor from '../routes/Doctor'
+import Doctor from '../routes/Doctor.js'
 
 class App extends Component {
 

@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Modal } from 'reactstrap';
 
 import './ConfirmModal.scss';
-import * as actions from "../store/actions";
-import { KeyCodeUtils } from "../utils";
+import * as actions from "../store/actions.js";
+import { KeyCodeUtils } from "../utils.js";
 
 class ConfirmModal extends Component {
 

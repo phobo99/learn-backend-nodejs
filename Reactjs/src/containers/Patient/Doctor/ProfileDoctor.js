@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import './ProfileDoctor.scss'
-import { getProfileDoctorById } from '../../../services/userService'
-import { LANGUAGES } from '../../../utils';
+import { getProfileDoctorById } from '../../../services/userService.js'
+import { LANGUAGES } from '../../../utils.js';
 import NumberFormat from 'react-number-format';
 
 class ProfileDoctor extends Component {

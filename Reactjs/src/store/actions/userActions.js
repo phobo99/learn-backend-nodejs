@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes';
+import actionTypes from './actionTypes.js';
 
 export const addUserSuccess = () => ({
     type: actionTypes.ADD_USER_SUCCESS

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import HomeHeader from '../../HomePage/HomeHeader';
 import './DetailDoctor.scss'
-import { getDetailInforDoctor } from '../../../services/userService'
-import { LANGUAGES } from '../../../utils';
+import { getDetailInforDoctor } from '../../../services/userService.js'
+import { LANGUAGES } from '../../../utils.js';
 import DoctorSchedule from './DoctorSchedule';
 import DoctorExtraInfo from './DoctorExtraInfo';
 

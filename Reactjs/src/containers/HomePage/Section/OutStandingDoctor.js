@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import Slider from 'react-slick';
-import * as actions from '../../../store/actions';
-import { LANGUAGES } from '../../../utils'
+import * as actions from '../../../store/actions.js';
+import { LANGUAGES } from '../../../utils.js'
 import { withRouter } from 'react-router'
 
 class OutStandingDoctor extends Component {
