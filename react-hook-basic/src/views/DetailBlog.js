@@ -1,5 +1,5 @@
 import { useParams, useHistory } from 'react-router-dom';
-import useFetch from '../customize/fetch';
+import useFetch from '../customize/fetch.js';
 import './Blog.scss';
 
 const DetailBlog = () => {

@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import HomeHeader from './HomeHeader';
 import Specialty from './Section/Specialty';
 import MedicalFacility from './Section/MedicalFacility';
-import OutStandingDoctor from './Section/OutStandingDoctor';
-import HandBook from './Section/HandBook';
-import About from './Section/About';
-import HomeFooter from './HomeFooter';
+import OutStandingDoctor from './Section/OutStandingDoctor.js';
+import HandBook from './Section/HandBook.js';
+import About from './Section/About.js';
+import HomeFooter from './HomeFooter.js';
 
 import './HomePage.scss';
 

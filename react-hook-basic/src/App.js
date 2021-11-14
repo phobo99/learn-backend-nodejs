@@ -2,14 +2,14 @@ import logo from './logo.svg';
 import './App.css';
 import Nav from './views/Nav.js';
 import { useState, useEffect } from 'react';
-import Todo from './views/Todo';
-import Covid from './views/Covid';
-import { CountDown, NewCountDown } from './views/Countdown';
+import Todo from './views/Todo.js';
+import Covid from './views/Covid.js';
+import { CountDown, NewCountDown } from './views/Countdown.js';
 import Blog from './views/Blog';
-import DetailBlog from './views/DetailBlog';
-import AddNewBlog from './views/AddNewBlog';
-import NotFound from './views/NotFound';
-import YoutubeSearch from './views/YoutubeSearch';
+import DetailBlog from './views/DetailBlog.js';
+import AddNewBlog from './views/AddNewBlog.js';
+import NotFound from './views/NotFound.js';
+import YoutubeSearch from './views/YoutubeSearch.js';
 import {
   BrowserRouter as Router,
   Switch,

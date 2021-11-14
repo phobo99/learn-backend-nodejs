@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllCodeService } from '../../../services/userService'
-import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils';
-import * as actions from "../../../store/actions"
+import { getAllCodeService } from '../../../services/userService.js'
+import { LANGUAGES, CRUD_ACTIONS, CommonUtils } from '../../../utils.js';
+import * as actions from "../../../store/actions.js"
 import './UserRedux.scss'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app

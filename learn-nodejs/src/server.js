@@ -1,6 +1,6 @@
 import express from 'express';
-import configViewEngine from './configs/viewEngine';
-import initWebRoute from './route/web';
+import configViewEngine from './configs/viewEngine.js';
+import initWebRoute from './route/web.js';
 
 require('dotenv').config();
 

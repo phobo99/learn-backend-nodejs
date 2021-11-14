@@ -1,4 +1,4 @@
-import actionTypes from './actionTypes';
+import actionTypes from './actionTypes.js';
 
 export const appStartUpComplete = () => ({
     type: actionTypes.APP_START_UP_COMPLETE

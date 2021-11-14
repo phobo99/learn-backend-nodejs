@@ -1,7 +1,7 @@
 import express from "express";
-import homeController from "../controllers/HomeController";
-import userController from "../controllers/userController";
-import doctorController from "../controllers/doctorController"
+import homeController from "../controllers/HomeController.js";
+import userController from "../controllers/userController.js";
+import doctorController from "../controllers/doctorController.js"
 
 let router = express.Router();
 
