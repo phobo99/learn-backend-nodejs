@@ -58,7 +58,6 @@ class ProfileDoctor extends Component {
             )
         }
         return <></>
-
     }
     render() {
         let { dataProfile } = this.state;
