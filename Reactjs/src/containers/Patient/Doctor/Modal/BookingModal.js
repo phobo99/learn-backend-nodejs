@@ -12,6 +12,7 @@ import Select from 'react-select';
 import { postPatientBookAppointment } from '../../../../services/userService';
 import { toast } from 'react-toastify';
 import moment from "moment";
+import LoadingOverlay from 'react-loading-overlay';
 
 class BookingModal extends Component {
 
@@ -28,6 +29,7 @@ class BookingModal extends Component {
             doctorId: '',
             genders: '',
             timeType: '',
+            isShowLoading: false
         }
     }
     async componentDidMount() {
@@ -111,6 +113,9 @@ class BookingModal extends Component {
     handleConfirmBooking = async () => {
         //validate input
         //data.email || !data.doctorId || !data.timeType ||!data.date
+        this.setState({
+            isShowLoading: true
+        })
         let date = new Date(this.state.birthday).getTime();
         let timeString = this.buildTimeBooking(this.props.dataTime);
         let doctorName = this.buildDoctorName(this.props.dataTime);
@@ -121,7 +126,8 @@ class BookingModal extends Component {
             email: this.state.email,
             address: this.state.address,
             reason: this.state.reason,
-            date: date,
+            date: this.props.dataTime.date,
+            birthday: date,
             selectedGender: this.state.selectedGender.value,
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
@@ -129,7 +135,9 @@ class BookingModal extends Component {
             timeString: timeString,
             doctorName: doctorName
         })
-
+        this.setState({
+            isShowLoading: false
+        })
         if (res && res.errCode === 0) {
             toast.success('Booking a new appointment succeed!')
             this.props.closeBookingClose();
@@ -143,8 +151,13 @@ class BookingModal extends Component {
         if (dataTime && !_.isEmpty(dataTime)) {
             doctorId = dataTime.doctorId
         }
+        console.log('check state ', this.state)
         return (
-            <div>
+            <LoadingOverlay
+                active={this.state.isShowLoading}
+                spinner
+                text="Loading"
+            >
                 <Modal
                     isOpen={isOpenModal}
                     size='lg'
@@ -170,6 +183,8 @@ class BookingModal extends Component {
                                     doctorId={doctorId}
                                     isShowDescriptionDoctor={false}
                                     dataTime={dataTime}
+                                    isShowLinkDetail={false}
+                                    isShowPrice={true}
                                 />
                             </div>
                             <div className="row">
@@ -205,7 +220,7 @@ class BookingModal extends Component {
                                         onChange={(event) => this.handleOnchangeInput(event, 'address')}
                                     />
                                 </div>
-                                <div className="col-6 form-group">
+                                <div className="col-12 form-group">
                                     <label><FormattedMessage id="patient.booking-modal.reason" /></label>
                                     <input
                                         className="form-control"
@@ -245,7 +260,7 @@ class BookingModal extends Component {
                         </div>
                     </div>
                 </Modal>
-            </div>
+            </LoadingOverlay>
         )
     }
 }

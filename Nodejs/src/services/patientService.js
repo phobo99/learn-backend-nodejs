@@ -4,8 +4,7 @@ import emailService from './emailService'
 import { v4 as uuidv4 } from 'uuid';
 
 let buildUrlEmail = (doctorId, token) => {
-    let result = `${process.env.URL_REACT}/verify-booking?token=${token}&doctorId=${doctorId}`
-    return result
+    return `${process.env.URL_REACT}/verify-booking?token=${token}&doctorId=${doctorId}`
 }
 
 let postBookAppointment = (data) => {
@@ -19,24 +18,24 @@ let postBookAppointment = (data) => {
                     errMessage: 'Missing parameter'
                 })
             } else {
-                let token = uuidv4();
-                await emailService.sendSimpleEmail({
-                    receiverEmail: data.email,
-                    patientName: data.fullName,
-                    time: data.timeString,
-                    doctorName: data.doctorName,
-                    language: data.language,
-                    redirectLink: buildUrlEmail(data.doctorId, token)
-                })
-
                 //upsert patient
                 let user = await db.User.findOrCreate({
                     where: { email: data.email },
                     defaults: {
                         email: data.email,
-                        roleId: 'R3'
+                        roleId: 'R3',
+                        gender: data.selectedGender,
+                        address: data.address,
+                        firstName: data.fullName
                     },
                 });
+                //test later!
+                let finds3 = await db.Booking.findOne({
+                    where: {
+                        statusId: 'S3',
+                    }
+                })
+                console.log('Find S3: ', finds3)
 
                 //create a booking record
                 if (user && user[0]) {
@@ -52,6 +51,16 @@ let postBookAppointment = (data) => {
                         }
                     })
                 }
+
+                let token = uuidv4();
+                await emailService.sendSimpleEmail({
+                    receiverEmail: data.email,
+                    patientName: data.fullName,
+                    time: data.timeString,
+                    doctorName: data.doctorName,
+                    language: data.language,
+                    redirectLink: buildUrlEmail(data.doctorId, token)
+                })
 
                 resolve({
                     errCode: 0,
